@@ -21,8 +21,10 @@ export class UserService{
     public static findUserById(id: string){
         return UserModel.query().findOne('user.id',id).where('user.isActive',true);
     }
-    public static findUserByUserName(userName: string){
-        return UserModel.query().findOne('user.userName',userName).where('user.isActive',true);
+    public static async findUserByUserName(userName: string){
+        const user = await UserModel.query().findOne('user.userName',userName).where('user.isActive',true);
+        if (!user) throw new Error('User not found');
+        return user;
     }
     public static findAllUsers(){
         return UserModel.query().where('user.isActive',true);

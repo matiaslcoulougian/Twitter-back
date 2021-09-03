@@ -17,6 +17,15 @@ router.get('/',async(_,res)=>{
 });
 router.get('/:userName',async(req,res)=>{
     try{
+        const users = await UserService.findUserByUserName(req.params.userName);
+        res.status(200).json({response: users}).send();
+    }
+    catch(e){
+        res.status(400).json({error: e.message}).send();
+    }
+});
+router.put('/:userName',async(req,res)=>{
+    try{
         const {userName} = req.params;
         const validateBody = UserValidator.validateUpdateUserBody(req.body);
         const user = await UserService.updateUser(validateBody,{userName});
@@ -36,3 +45,5 @@ router.post('/register', async (req, res) => {
         res.status(400).json({ error: e.message }).send();
     }
 });
+export { router as userRouter };
+//router.delete

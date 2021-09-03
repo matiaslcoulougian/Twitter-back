@@ -22,7 +22,7 @@ const knexConfig: Knex.Config = {
   connection: connectionConfig,
   migrations: {
     tableName: 'migrations',
-    directory: 'migrations',
+    directory: 'src/db/migrations',
   },
   debug: false,
 };
