@@ -10,14 +10,14 @@ import knexfile from '../src/db/knexfile';
 const testUrl ={
   host: 'localhost',
   user: 'postgres',
-  password: '09530953',
-  database: 'plans_db'
+  password: 'postgres',
+  database: 'twitter_db'
 }
 const url ={
   host: 'localhost',
   user: 'postgres',
-  password: '09530953',
-  database: 'plans_db'
+  password: 'postgres',
+  database: 'twitter_db'
 }
 
 const resetDb = async (dbUrl: any, seed = true) => {
