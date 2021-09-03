@@ -3,7 +3,6 @@ import path from 'path';
 import { exit } from 'process';
 
 import knex from 'knex';
-import { parse as parseDbUrl } from 'pg-connection-string';
 
 import knexfile from '../src/db/knexfile';
 
