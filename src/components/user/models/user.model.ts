@@ -3,7 +3,7 @@ import {Model} from "objection";
 import {BaseModel} from "@/db";
 
 export class UserModel extends BaseModel{
-    public static tablename = 'users';
+    public static tableName = 'users';
 
     public userName!: string;
     public password!: string;

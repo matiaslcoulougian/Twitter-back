@@ -19,10 +19,10 @@ export class UserService{
         return UserModel.query().insert({name,userName,password,mail, phone, birthDate,bibliography,location,website});
     }
     public static findUserById(id: string){
-        return UserModel.query().findOne('user.id',id).where('user.isActive',true);
+        return UserModel.query().findOne({id:id,isActive:true});
     }
     public static async findUserByUserName(userName: string){
-        const user = await UserModel.query().findOne('user.userName',userName).where('user.isActive',true);
+        const user = await UserModel.query().findOne({userName:userName,isActive:true});
         if (!user) throw new Error('User not found');
         return user;
     }
@@ -34,7 +34,7 @@ export class UserService{
         if (!user) throw new Error('User not found');
         return user.$query().patchAndFetch(data);
     }
-    public static markAsDeleted(id: string) {
+    public static markAsDeleted(id: number) {
         return UserModel.query().patchAndFetchById(id, { isActive: false });
     }
 }

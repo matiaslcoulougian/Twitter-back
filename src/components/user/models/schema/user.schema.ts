@@ -14,7 +14,7 @@ export const userSchema = {
             type: 'string',
             format: 'email',
         },
-        phone: {type: 'integer'},
+        phone: {type: 'string'},
         birthDate: {type: 'string'},
     }
 };
