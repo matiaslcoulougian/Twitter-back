@@ -19,23 +19,4 @@ export class UserModel extends BaseModel{
     public static get jsonSchema(){
         return userSchema;
     }
-    // public static get relationMappings() {
-    //     return {
-    //         role: {
-    //             relation: Model.HasManyRelation,
-    //             modelClass: RoleModel,
-    //             join: {
-    //                 from: `${this.tableName}.roleId`,
-    //                 to: `${RoleModel.tableName}.id`,
-    //             },
-    //         },
-    //     };
-    // }
-    //
-    // public static fetchRelations() {
-    //     return {
-    //         role: true,
-    //     };
-    // }
-
 }

@@ -1,8 +1,7 @@
 export const tweetSchema = {
     type: 'object',
-    required: ['text','userID'],
+    required: ['text'],
     properties: {
         text : {type: 'string', maxLength:240 },
-        userID: {type: 'string'},
     }
 };

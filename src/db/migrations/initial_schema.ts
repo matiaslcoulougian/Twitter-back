@@ -19,8 +19,10 @@ export const up = (knex: Knex): Promise<void> => {
     .createTable('tweets', (table)=>{
        table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
        table.string('text');
-       table.string('user_id');
-       table.string('parent_tweet_id');
+       table.uuid('user_id');
+       table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
+       table.uuid('parent_tweet_id');
+       table.foreign('parent_tweet_id').references('id').inTable('tweets').onDelete('CASCADE')
        table.boolean('is_active').defaultTo(true);
        table.timestamps(true, true);
     })
