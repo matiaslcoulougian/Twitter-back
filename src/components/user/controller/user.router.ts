@@ -51,7 +51,6 @@ export { router as userRouter };
 router.delete('/:userName', async (req, res) => {
     try{
         const {userName} = req.params;
-        const validateBody = UserValidator.validateUpdateUserBody(req.body);
         let user = await UserService.findUserByUserName(userName);
         user = await UserService.markAsDeleted(user.id);
         res.status(200).json({ response: user }).send();

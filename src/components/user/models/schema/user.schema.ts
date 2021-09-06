@@ -2,8 +2,8 @@ export const userSchema = {
     type: 'object',
     required: ['name','userName', 'password','mail','phone','birthDate'],
     properties: {
-        name: {type: 'string', minLength: 3, maxLength: 15},
-        userName: {type: 'string', minLength: 1, maxLength: 15},
+        name: {type: 'string', minLength: 3, maxLength: 30},
+        userName: {type: 'string', minLength: 1, maxLength: 20},
         password: {
             type: 'string',
             minLength: 8,
