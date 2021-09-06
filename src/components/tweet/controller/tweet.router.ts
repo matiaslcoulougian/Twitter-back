@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 });
 router.delete('/:tweetID', async (req, res) => {
     try{
-        let tweet = await TweetServices.findTweetById({id: req.params.tweetID}, false);
+        let tweet = await TweetServices.findTweetById({id: req.params.tweetID},false);
         tweet = await TweetServices.markAsDeleted(tweet.id);
         res.status(200).json({ response: tweet }).send();
     }
