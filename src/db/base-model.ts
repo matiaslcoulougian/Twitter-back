@@ -3,7 +3,7 @@ import { Model } from 'objection';
 export class BaseModel extends Model {
   public static tableName: string;
 
-  public id!: number;
+  public id!: string;
   public createdAt!: Date;
   public updatedAt!: Date;
 

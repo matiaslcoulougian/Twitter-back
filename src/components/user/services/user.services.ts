@@ -34,7 +34,7 @@ export class UserService{
         if (!user) throw new Error('User not found');
         return user.$query().patchAndFetch(data);
     }
-    public static markAsDeleted(id: number) {
+    public static markAsDeleted(id: string) {
         return UserModel.query().patchAndFetchById(id, { isActive: false });
     }
 }
