@@ -1,6 +1,7 @@
 import {BaseModel} from "@/db";
 import {tweetSchema} from "@/components/tweet/models/schema/tweet.schema";
 import {UserModel} from "@/components/user/models/user.model";
+import {Model} from "objection";
 
 export class TweetModel extends BaseModel{
     public static tableName = 'tweets';

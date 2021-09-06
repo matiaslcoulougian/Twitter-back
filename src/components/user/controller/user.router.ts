@@ -35,7 +35,7 @@ router.put('/:userName',async(req,res)=>{
             res.status(404).json({error: e.message}).send();
         }
 });
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const userBody = req.body;
         const validatedBody = UserValidator.validateCreateUserBody(userBody);

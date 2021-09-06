@@ -1,7 +1,6 @@
 import {TweetModel} from "@/components/tweet/models/tweet.model";
-import {UserModel} from "@/components/user/models/user.model";
 import {UserService} from "@/components/user/services/user.services";
-import {tweetSchema} from "@/components/tweet/models/schema/tweet.schema";
+import Objection from "objection";
 
 export class TweetServices{
     public static async createTweet({
@@ -13,11 +12,11 @@ export class TweetServices{
     }){
         const user = await UserService.findUserById(userID);
         if(!user) throw new Error('User not found');
-        const parentTweet = await TweetServices.findTweetById(parentTweetID);
+        //const parentTweet = await TweetServices.findTweetById(parentTweetID);
 
-        return TweetModel.query().insert({text, userID: user.id, parentTweetID: parentTweet.id});
+        return TweetModel.query().insert({text, userID: user.id, parentTweetID});
     }
-    public static findTweetById({id}: {id: string},fetchRelated?:boolean){
+    public static findTweetById({id}: {id:string},fetchRelated?:boolean){
         const tweetQuery = TweetModel.query().findOne({id:id, isActive:true});
         return fetchRelated ? this.fetchRelatedItem(tweetQuery) : tweetQuery;
     }

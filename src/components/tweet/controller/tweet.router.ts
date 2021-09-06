@@ -3,6 +3,7 @@ import {TweetServices} from "@/components/tweet/services/tweet.services";
 import {TweetValidator} from "@/components/tweet/validator/tweet.validator";
 import {UserService} from "@/components/user/services/user.services";
 import express from "express";
+import {logger} from "@/logger";
 
 const router= express.Router();
 router.get('/',async(_,res)=>{
@@ -16,14 +17,15 @@ router.get('/',async(_,res)=>{
 });
 router.get('/:userID',async(req,res)=>{
     try{
-        const tweets = await TweetServices.findAllTweetsFromUser(req.params.userID);
+        const userID= req.params.userID;
+        const tweets = await TweetServices.findAllTweetsFromUser({ userID: userID }, false);
         res.status(200).json({response: tweets}).send();
     }
     catch(e){
         res.status(400).json({error: e.message}).send();
     }
 });
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const tweetBody = req.body;
         const validatedBody = TweetValidator.validateCreateTweetBody(tweetBody);
@@ -35,8 +37,7 @@ router.post('/register', async (req, res) => {
 });
 router.delete('/:tweetID', async (req, res) => {
     try{
-        const {tweetID} = req.params;
-        let tweet = await TweetServices.findTweetById(tweetID);
+        let tweet = await TweetServices.findTweetById({id: req.params.tweetID}, false);
         tweet = await TweetServices.markAsDeleted(tweet.id);
         res.status(200).json({ response: tweet }).send();
     }
