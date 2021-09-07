@@ -16,23 +16,23 @@ export class RetweetServices{
         return RetweetModel.query().insert({userRetweeterID: user.id, tweetID: tweet.id});
     }
     public static findRetweetById({id} : {id:string},fetchRelated? : boolean){
-        const retweetQuery = RetweetModel.query().findOne({id:id, isActive:true});
+        const retweetQuery = RetweetModel.query().findOne({'retweets.id':id, 'retweets.isActive':true});
         return fetchRelated ? this.fetchRelatedItem(retweetQuery) : retweetQuery;
     }
     public static findAllRetweets(fetchRelated?:true){
-        const retweetsQuery = RetweetModel.query().where({isActive:true});
+        const retweetsQuery = RetweetModel.query().where({'retweets.isActive':true});
         return fetchRelated ? this.fetchRelatedList(retweetsQuery) : retweetsQuery;
     }
     public static findRetweetsFromTweet({tweetID} : {tweetID:string},fetchRelated? : boolean){
         const retweetsQuery = RetweetModel.query().where({
-            isActive: true,
+            'retweets.isActive': true,
             tweetID : tweetID,
         });
         return fetchRelated ? this.fetchRelatedList(retweetsQuery) : retweetsQuery;
     }
     public static findRetweetsFromUser({userRetweeterID} : {userRetweeterID:string},fetchRelated? : boolean){
         const retweetsQuery = RetweetModel.query().where({
-            isActive: true,
+            'retweets.isActive': true,
             userRetweeterID : userRetweeterID,
         });
         return fetchRelated ? this.fetchRelatedList(retweetsQuery) : retweetsQuery;

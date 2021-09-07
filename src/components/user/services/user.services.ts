@@ -1,4 +1,9 @@
 import {UserModel} from "@/components/user/models/user.model";
+import {TweetServices} from "@/components/tweet/services/tweet.services";
+import {FollowService} from "@/components/follow/services/follow.service";
+import {LikeServices} from "@/components/like/services/like.services";
+import {RetweetServices} from "@/components/retweet/services/retweet.services";
+import {TweetModel} from "@/components/tweet/models/tweet.model";
 
 //'userName', 'name','password','mail','phone','birthDate'
 
@@ -36,7 +41,36 @@ export class UserService{
         if (!user) throw new Error('User not found');
         return user.$query().patchAndFetch(data);
     }
-    public static markAsDeleted(id: string) {
+    public static async markAsDeleted(id: string) {
+
+        const tweets = await TweetServices.findAllTweetsFromUser({userID:id});
+        const followed = await FollowService.findUserFollows({followerUserID:id});
+        const followers = await FollowService.findUserFollowers({followedUserID:id});
+        const likes = await LikeServices.findLikesFromUser({userID:id});
+        const retweets = await RetweetServices.findRetweetsFromUser({userRetweeterID:id})
+
+        //For loops to set isActive to false.
+        const tweetsPromise = tweets.map((tweet) =>{
+            return TweetServices.markAsDeleted(tweet.id)
+        });
+        const followedPromise = followed.map((follow) =>{
+            return FollowService.markAsDeleted(follow.id);
+        });
+        const followersPromise =followers.map((follower) =>{
+            return FollowService.markAsDeleted(follower.id);
+        });
+        const likesPromise =likes.map((like) =>{
+            return LikeServices.markAsDeleted(like.id);
+        });
+        const retweetsPromise =retweets.map((retweet) =>{
+            return RetweetServices.markAsDeleted(retweet.id);
+        });
+        await Promise.all(tweetsPromise);
+        await Promise.all(followersPromise);
+        await Promise.all(followedPromise);
+        await Promise.all(likesPromise);
+        await Promise.all(retweetsPromise);
+
         return UserModel.query().patchAndFetchById(id, { isActive: false });
     }
 }
