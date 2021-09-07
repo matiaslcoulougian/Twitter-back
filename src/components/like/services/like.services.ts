@@ -17,23 +17,23 @@ export class LikeServices {
         return LikeModel.query().insert({userId: user.id, tweetId: tweet.id});
     }
     public static findLikeById({id} : {id:string},fetchRelated? : boolean){
-        const likeQuery = LikeModel.query().findOne({id:id, isActive:true});
+        const likeQuery = LikeModel.query().findOne({'likes.id':id, 'likes.isActive':true});
         return fetchRelated ? this.fetchRelatedItem(likeQuery) : likeQuery;
     }
     public static findAllLikes(fetchRelated? : boolean){
-        const likesQuery = LikeModel.query().where({isActive:true});
+        const likesQuery = LikeModel.query().where({'likes.isActive':true});
         return fetchRelated ? this.fetchRelatedList(likesQuery) : likesQuery;
     }
     public static findLikesFromTweet({tweetId} : {tweetId:string},fetchRelated? : boolean){
        const likesQuery = LikeModel.query().where({
-           isActive: true,
            tweetId : tweetId,
+           'likes.isActive': true,
        });
         return fetchRelated ? this.fetchRelatedList(likesQuery) : likesQuery;
     }
     public static findLikesFromUser({userId} : {userId:string},fetchRelated? : boolean){
         const likesQuery = LikeModel.query().where({
-            isActive: true,
+            'likes.isActive': true,
             userId : userId,
         });
         return fetchRelated ? this.fetchRelatedList(likesQuery) : likesQuery;

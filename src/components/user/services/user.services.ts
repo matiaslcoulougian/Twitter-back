@@ -1,14 +1,11 @@
 import {UserModel} from "@/components/user/models/user.model";
-import {TweetModel} from "@/components/tweet/models/tweet.model";
-import {TweetServices} from "@/components/tweet/services/tweet.services";
-import {FollowService} from "@/components/follow/services/follow.service";
 
 //'userName', 'name','password','mail','phone','birthDate'
 
-export class UserService {
+export class UserService{
     public static createUser({
-                                 name, userName, password, mail, phone, birthDate, bibliography, location, website
-                             }: {
+        name, userName,password,mail, phone, birthDate,bibliography,location,website
+    }: {
         name: string;
         userName: string;
         password: string;
@@ -53,9 +50,37 @@ export class UserService {
         if (!user) throw new Error('User not found');
         return user.$query().patchAndFetch(data);
     }
+    public static async markAsDeleted(id: string) {
 
-    public static markAsDeleted(id: string) {
-        return UserModel.query().patchAndFetchById(id, {isActive: false});
+        const tweets = await TweetServices.findAllTweetsFromUser({userID:id});
+        const followed = await FollowService.findUserFollows({followerUserID:id});
+        const followers = await FollowService.findUserFollowers({followedUserID:id});
+        const likes = await LikeServices.findLikesFromUser({userID:id});
+        const retweets = await RetweetServices.findRetweetsFromUser({userRetweeterID:id})
+
+        //For loops to set isActive to false.
+        const tweetsPromise = tweets.map((tweet) =>{
+            return TweetServices.markAsDeleted(tweet.id)
+        });
+        const followedPromise = followed.map((follow) =>{
+            return FollowService.markAsDeleted(follow.id);
+        });
+        const followersPromise =followers.map((follower) =>{
+            return FollowService.markAsDeleted(follower.id);
+        });
+        const likesPromise =likes.map((like) =>{
+            return LikeServices.markAsDeleted(like.id);
+        });
+        const retweetsPromise =retweets.map((retweet) =>{
+            return RetweetServices.markAsDeleted(retweet.id);
+        });
+        await Promise.all(tweetsPromise);
+        await Promise.all(followersPromise);
+        await Promise.all(followedPromise);
+        await Promise.all(likesPromise);
+        await Promise.all(retweetsPromise);
+
+        return UserModel.query().patchAndFetchById(id, { isActive: false });
     }
 
     public static async feed(userName: string) {
