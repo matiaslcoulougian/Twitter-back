@@ -1,4 +1,7 @@
 import {UserModel} from "@/components/user/models/user.model";
+import {FollowService} from "@/components/follow/services/follow.service";
+import {TweetServices} from "@/components/tweet/services/tweet.services";
+import {LikeServices} from "@/components/like/services/like.services";
 
 //'userName', 'name','password','mail','phone','birthDate'
 
