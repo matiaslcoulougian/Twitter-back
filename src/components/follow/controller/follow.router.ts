@@ -1,6 +1,6 @@
 import express from 'express';
-import {FollowService} from "@/components/follow/follow/services/follow.service";
-import {FollowerValidator} from "@/components/follow/follow/validator/follow.validator";
+import {FollowService} from "@/components/follow/services/follow.service";
+import {FollowerValidator} from "@/components/follow/validator/follow.validator";
 
 
 

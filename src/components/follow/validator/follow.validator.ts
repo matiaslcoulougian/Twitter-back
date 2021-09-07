@@ -1,4 +1,4 @@
-import {CreateFollowerInput, createFollowerInputSchema} from "@/components/follow/follow/validator/types";
+import {CreateFollowerInput, createFollowerInputSchema} from "@/components/follow/validator/types";
 
 export class FollowerValidator{
     public static validateCreateFollowerBody(body: unknown): CreateFollowerInput{

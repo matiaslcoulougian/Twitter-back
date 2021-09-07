@@ -1,7 +1,7 @@
 
 import {UserService} from "@/components/user/services/user.services";
 import Objection from "objection";
-import {FollowModel} from "@/components/follow/follow/models/follow.model";
+import {FollowModel} from "@/components/follow/models/follow.model";
 import {TweetModel} from "@/components/tweet/models/tweet.model";
 
 export class FollowService{

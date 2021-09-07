@@ -2,11 +2,12 @@ import argon2 from 'argon2';
 import Knex from 'knex';
 
 export async function seed(knex: Knex): Promise<void> {
+    const hashedPassword = await argon2.hash('Hello1234*');
     const users = await knex('users').insert(
         [
             {
                 user_name: "aaaaaaBBB",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Carlos',
                 mail: 'aasdf@gmail.com',
                 phone: '1118868329',
@@ -14,7 +15,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "CCC",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Carlos Rodriguez',
                 mail: 'aasdf@gmail.com',
                 phone: '1118868329',
@@ -22,7 +23,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "dddd",
-                password: '1234*',
+                password: hashedPassword,
                 name: 'Juan',
                 mail: 'aasdf@gmail.com',
                 phone: '1118868329',
@@ -30,7 +31,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "abc",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Carlos abc',
                 mail: 'aqqqwe@gmail.com',
                 phone: '1118868329',
@@ -38,7 +39,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "mellamojuan",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Juan',
                 mail: 'juan@gmail.com',
                 phone: '1111122431',
@@ -46,7 +47,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "adasdadds",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Carla',
                 mail: 'asdd@gmail.com',
                 phone: '11188680329',
@@ -54,7 +55,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "LionelMessi",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Messi',
                 mail: 'messi@gmail.com',
                 phone: '1118868329',
@@ -62,7 +63,7 @@ export async function seed(knex: Knex): Promise<void> {
             },
             {
                 user_name: "aaaaaaa",
-                password: '123456Aaaaa*',
+                password: hashedPassword,
                 name: 'Alejo',
                 mail: 'alejito@gmail.com',
                 phone: '1118868329',
