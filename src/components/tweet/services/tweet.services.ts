@@ -13,7 +13,6 @@ export class TweetServices{
         const user = await UserService.findUserById(userID);
         if(!user) throw new Error('User not found');
         //const parentTweet = await TweetServices.findTweetById(parentTweetID);
-
         return TweetModel.query().insert({text, userID: user.id, parentTweetID});
     }
     public static findTweetById({id}: {id : string},fetchRelated?:boolean){

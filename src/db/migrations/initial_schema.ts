@@ -35,10 +35,20 @@ export const up = (knex: Knex): Promise<void> => {
             table.boolean('is_active').defaultTo(true);
             table.timestamps(true, true);
         })
+        .createTable('follows', (table) => {
+            table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
+            table.uuid('follower_user_id');
+            table.foreign('follower_user_id').references('id').inTable('users').onDelete('CASCADE')
+            table.uuid('followed_user_id');
+            table.foreign('followed_user_id').references('id').inTable('users').onDelete('CASCADE')
+            table.boolean('is_active').defaultTo(true);
+            table.timestamps(true, true);
+        })
 };
 
 export const down = (knex: Knex): Promise<void> => {
     return knex.schema.dropTable('users');
     return knex.schema.dropTable('tweets');
     return knex.schema.dropTable('likes');
+    return knex.schema.dropTable('follows');
 };

@@ -163,4 +163,46 @@ export async function seed(knex: Knex): Promise<void> {
             tweet_id: tweets[5].id,
         },
     ])
+    const follows = await knex('follows').insert([
+        {
+            follower_user_id: users[1].id,
+            followed_user_id: users[2].id,
+        },
+        {
+            follower_user_id : users[2].id,
+            followed_user_id : users[1].id,
+        },
+        {
+            follower_user_id: users[2].id,
+            followed_user_id: users[4].id,
+        },
+        {
+            follower_user_id: users[3].id,
+            followed_user_id: users[5].id,
+        },
+        {
+            follower_user_id: users[1].id,
+            followed_user_id: users[5].id,
+        },
+        {
+            follower_user_id: users[7].id,
+            followed_user_id: users[6].id,
+        },
+        {
+            follower_user_id: users[5].id,
+            followed_user_id: users[7].id,
+        },
+        {
+            follower_user_id: users[6].id,
+            followed_user_id: users[5].id,
+        },
+        {
+            follower_user_id: users[3].id,
+            followed_user_id: users[2].id,
+        },
+        {
+            follower_user_id: users[4].id,
+            followed_user_id: users[1].id,
+        },
+        ])
 }
