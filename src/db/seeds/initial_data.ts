@@ -110,4 +110,57 @@ export async function seed(knex: Knex): Promise<void> {
         parent_tweet_id: tweets[1].id
         },
     ])
+    await knex('likes').insert([
+        {
+            user_id: users[1].id,
+            tweet_id: tweets[0].id,
+        },
+        {
+            user_id: users[2].id,
+            tweet_id: tweets[3].id,
+        },
+        {
+            user_id: users[2].id,
+            tweet_id: tweets[1].id,
+        },
+        {
+            user_id: users[5].id,
+            tweet_id: tweets[4].id,
+        },
+        {
+            user_id: users[1].id,
+            tweet_id: tweets[1].id,
+        },
+        {
+            user_id: users[6].id,
+            tweet_id: tweets[5].id,
+        },
+        {
+            user_id: users[1].id,
+            tweet_id: tweets[0].id,
+        },
+        {
+            user_id: users[1].id,
+            tweet_id: tweets[3].id,
+        },
+        {
+            user_id: users[3].id,
+            tweet_id: tweets[2].id,
+        },{
+            user_id: users[2].id,
+            tweet_id: tweets[2].id,
+        },
+        {
+            user_id: users[0].id,
+            tweet_id: tweets[0].id,
+        },
+        {
+            user_id: users[3].id,
+            tweet_id: tweets[3].id,
+        },
+        {
+            user_id: users[1].id,
+            tweet_id: tweets[5].id,
+        },
+    ])
 }

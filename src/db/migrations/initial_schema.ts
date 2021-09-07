@@ -16,7 +16,7 @@ export const up = (knex: Knex): Promise<void> => {
             table.boolean('is_active').defaultTo(true);
             table.timestamps(true, true);
         })
-    .createTable('tweets', (table)=>{
+        .createTable('tweets', (table)=>{
        table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
        table.string('text');
        table.uuid('user_id');
@@ -26,9 +26,19 @@ export const up = (knex: Knex): Promise<void> => {
        table.boolean('is_active').defaultTo(true);
        table.timestamps(true, true);
     })
+        .createTable('likes', (table)=>{
+            table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
+            table.uuid('user_id');
+            table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
+            table.uuid('tweet_id');
+            table.foreign('tweet_id').references('id').inTable('tweets').onDelete('CASCADE')
+            table.boolean('is_active').defaultTo(true);
+            table.timestamps(true, true);
+        })
 };
 
 export const down = (knex: Knex): Promise<void> => {
     return knex.schema.dropTable('users');
     return knex.schema.dropTable('tweets');
+    return knex.schema.dropTable('likes');
 };
