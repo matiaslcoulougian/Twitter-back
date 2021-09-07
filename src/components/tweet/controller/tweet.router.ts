@@ -25,6 +25,26 @@ router.get('/:userID',async(req,res)=>{
         res.status(400).json({error: e.message}).send();
     }
 });
+router.get('/:id',async(req,res)=>{
+    try{
+        const id= req.params.id;
+        const tweet = await TweetServices.findTweetById({ id: id }, false);
+        res.status(200).json({response: tweet}).send();
+    }
+    catch(e){
+        res.status(400).json({error: e.message}).send();
+    }
+});
+router.get('/:id/responses',async(req,res)=>{
+    try{
+        const id= req.params.id;
+        const tweets = await TweetServices.findResponsesFromTweet({ id: id }, false);
+        res.status(200).json({response: tweets}).send();
+    }
+    catch(e){
+        res.status(400).json({error: e.message}).send();
+    }
+});
 router.post('/', async (req, res) => {
     try {
         const tweetBody = req.body;
