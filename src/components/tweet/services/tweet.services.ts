@@ -16,12 +16,12 @@ export class TweetServices{
         return TweetModel.query().insert({text, userID: user.id, parentTweetID});
     }
     public static findTweetById({id}: {id : string},fetchRelated?:boolean){
-        const tweetQuery = TweetModel.query().findOne({id:id, isActive:true});
+        const tweetQuery = TweetModel.query().findOne({'tweets.id':id, 'tweets.isActive':true});
         return fetchRelated ? this.fetchRelatedItem(tweetQuery) : tweetQuery;
     }
     public static findAllTweets(fetchRelated?:boolean){
         const tweetsQuery = TweetModel.query().where({
-            isActive: true,
+            'tweets.isActive': true,
         });
         return fetchRelated
         ? this.fetchRelatedList(tweetsQuery)
@@ -32,8 +32,8 @@ export class TweetServices{
     }
     public static findAllTweetsFromUser({userID}: {userID: string},fetchRelated?:boolean){
         const tweetsQuery = TweetModel.query().where({
-            userID:  userID,
-            isActive: true,
+            'tweets.userID':  userID,
+            'tweets.isActive': true,
         });
         return fetchRelated? this.fetchRelatedList(tweetsQuery) : tweetsQuery;
     }

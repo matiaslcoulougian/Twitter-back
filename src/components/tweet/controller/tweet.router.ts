@@ -8,17 +8,17 @@ import {logger} from "@/logger";
 const router= express.Router();
 router.get('/',async(_,res)=>{
     try{
-        const tweets = await TweetServices.findAllTweets();
+        const tweets = await TweetServices.findAllTweets(true);
         res.status(200).json({response: tweets}).send();
     }
     catch(e){
         res.status(400).json({error: e.message}).send();
     }
 });
-router.get('/:userID',async(req,res)=>{
+router.get('/user/:userID',async(req,res)=>{
     try{
         const userID= req.params.userID;
-        const tweets = await TweetServices.findAllTweetsFromUser({ userID: userID }, false);
+        const tweets = await TweetServices.findAllTweetsFromUser({ userID: userID }, true);
         res.status(200).json({response: tweets}).send();
     }
     catch(e){
@@ -28,7 +28,7 @@ router.get('/:userID',async(req,res)=>{
 router.get('/:id',async(req,res)=>{
     try{
         const id= req.params.id;
-        const tweet = await TweetServices.findTweetById({ id: id }, false);
+        const tweet = await TweetServices.findTweetById({ id: id }, true);
         res.status(200).json({response: tweet}).send();
     }
     catch(e){
@@ -38,7 +38,7 @@ router.get('/:id',async(req,res)=>{
 router.get('/:id/responses',async(req,res)=>{
     try{
         const id= req.params.id;
-        const tweets = await TweetServices.findResponsesFromTweet({ id: id }, false);
+        const tweets = await TweetServices.findResponsesFromTweet({ id: id }, true);
         res.status(200).json({response: tweets}).send();
     }
     catch(e){
@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
 });
 router.delete('/:tweetID', async (req, res) => {
     try{
-        let tweet = await TweetServices.findTweetById({id: req.params.tweetID},false);
+        let tweet = await TweetServices.findTweetById({id: req.params.tweetID},true);
         tweet = await TweetServices.markAsDeleted(tweet.id);
         res.status(200).json({ response: tweet }).send();
     }

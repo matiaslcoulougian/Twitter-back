@@ -23,7 +23,7 @@ export class FollowService{
     public static findUserFollowers({followedUserID}:{followedUserID:string},fetchRelated?:boolean){
         const followersQuery = FollowModel.query().where({
             followedUserID: followedUserID,
-            isActive: true,
+            'follows.isActive': true,
         });
         return fetchRelated ? this.fetchRelatedList(followersQuery) : followersQuery;
     }

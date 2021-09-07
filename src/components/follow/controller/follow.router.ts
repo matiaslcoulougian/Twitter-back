@@ -21,7 +21,7 @@ router.get('/',async(_,res)=>{
 router.get('/followers/:followedUserID', async(req,res)=> {
     try {
         const followedUserID = req.params.followedUserID;
-        const followers = await FollowService.findUserFollowers({followedUserID: followedUserID}, false);
+        const followers = await FollowService.findUserFollowers({followedUserID: followedUserID}, true);
         res.status(200).json({response: followers}).send();
     } catch (e) {
         res.status(400).json({error: e.message}).send();
@@ -30,7 +30,7 @@ router.get('/followers/:followedUserID', async(req,res)=> {
 router.get('/followed/:followerUserID', async(req,res)=> {
     try {
         const followerUserID = req.params.followerUserID;
-        const follows = await FollowService.findUserFollows({followerUserID: followerUserID}, false);
+        const follows = await FollowService.findUserFollows({followerUserID: followerUserID}, true);
         res.status(200).json({response: follows}).send();
     } catch (e) {
         res.status(400).json({error: e.message}).send();
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 });
 router.delete('/:followID',async (req, res) => {
     try{
-        let follow = await FollowService.findFollowByID({id: req.params.followID},false);
+        let follow = await FollowService.findFollowByID({id: req.params.followID},true);
         follow = await FollowService.markAsDeleted(follow.id);
         res.status(200).json({ response: follow }).send();
     }

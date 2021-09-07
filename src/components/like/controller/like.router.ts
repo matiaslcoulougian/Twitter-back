@@ -5,7 +5,7 @@ import {LikeServices} from "@/components/like/services/like.services";
 const router= express.Router();
 router.get('/',async(_,res)=>{
     try{
-        const likes = await LikeServices.findAllLikes(false);
+        const likes = await LikeServices.findAllLikes(true);
         res.status(200).json({response: likes}).send();
     }
     catch(e){
@@ -14,7 +14,7 @@ router.get('/',async(_,res)=>{
 });
 router.get('/:id',async(req,res)=>{
     try{
-        const like = await LikeServices.findLikeById({id:req.params.id},false);
+        const like = await LikeServices.findLikeById({id:req.params.id},true);
         res.status(200).json({response: like}).send();
     }
     catch(e){
@@ -23,7 +23,7 @@ router.get('/:id',async(req,res)=>{
 });
 router.get('/tweet/:tweetID',async(req,res)=>{
     try{
-        const likes = await LikeServices.findLikesFromTweet({tweetID:req.params.tweetID},false);
+        const likes = await LikeServices.findLikesFromTweet({tweetID:req.params.tweetID},true);
         res.status(200).json({response: likes}).send();
     }
     catch(e){
@@ -33,7 +33,7 @@ router.get('/tweet/:tweetID',async(req,res)=>{
 
 router.get('/user/:userID',async(req,res)=>{
     try{
-        const likes = await LikeServices.findLikesFromUser({userID : req.params.userID},false);
+        const likes = await LikeServices.findLikesFromUser({userID : req.params.userID},true);
         res.status(200).json({response: likes}).send();
     }
     catch(e){

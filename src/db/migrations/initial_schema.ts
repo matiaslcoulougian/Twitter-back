@@ -44,6 +44,15 @@ export const up = (knex: Knex): Promise<void> => {
             table.boolean('is_active').defaultTo(true);
             table.timestamps(true, true);
         })
+        .createTable('retweets', (table) => {
+            table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
+            table.uuid('user_retweeter_id');
+            table.foreign('user_retweeter_id').references('id').inTable('users').onDelete('CASCADE')
+            table.uuid('tweet_id');
+            table.foreign('tweet_id').references('id').inTable('tweets').onDelete('CASCADE')
+            table.boolean('is_active').defaultTo(true);
+            table.timestamps(true, true);
+        })
 };
 
 export const down = (knex: Knex): Promise<void> => {
@@ -51,4 +60,5 @@ export const down = (knex: Knex): Promise<void> => {
     return knex.schema.dropTable('tweets');
     return knex.schema.dropTable('likes');
     return knex.schema.dropTable('follows');
+    return knex.schema.dropTable('retweets');
 };

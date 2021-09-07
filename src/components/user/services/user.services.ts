@@ -27,7 +27,9 @@ export class UserService{
         return user;
     }
     public static findAllUsers(){
-        return UserModel.query().where('user.isActive',true);
+        return UserModel.query().where({
+            isActive: true,
+        });
     }
     public static async updateUser(data:Partial<UserModel>,{userName}:{userName: string}){
         const user = await this.findUserByUserName(userName);
