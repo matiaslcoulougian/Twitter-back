@@ -9,10 +9,10 @@ export class TweetModel extends BaseModel{
     public text! : string;
     public isActive!: boolean;
 
-    public userID!: string;
+    public userId!: string;
     public user!: UserModel;
 
-    public parentTweetID?: string;
+    public parentTweetId?: string;
     public parentTweet?: TweetModel;
 
     public static get jsonSchema(){
@@ -24,7 +24,7 @@ export class TweetModel extends BaseModel{
                 relation: Model.HasOneRelation,
                 modelClass: UserModel,
                 join: {
-                    from: `${this.tableName}.userID`,
+                    from: `${this.tableName}.userId`,
                     to: `${UserModel.tableName}.id`,
                 },
             },
@@ -32,7 +32,7 @@ export class TweetModel extends BaseModel{
                 relation: Model.HasOneRelation,
                 modelClass: TweetModel,
                 join: {
-                    from: `${this.tableName}.parentTweetID`,
+                    from: `${this.tableName}.parentTweetId`,
                     to: `${TweetModel.tableName}.id`,
                 },
             },

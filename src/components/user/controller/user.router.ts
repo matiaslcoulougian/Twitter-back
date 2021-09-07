@@ -59,3 +59,13 @@ router.delete('/:userName', async (req, res) => {
         res.status(404).json({error: e.message}).send();
     }
 });
+router.get('/feed/:userName', async (req, res) => {
+    try{
+        const {userName} = req.params;
+        let tweets= await UserService.feed(userName);
+        res.status(200).json({ response: tweets }).send();
+    }
+    catch(e){
+        res.status(404).json({error: e.message}).send();
+    }
+});

@@ -13,7 +13,7 @@ const router = express.Router();
  *         description: Returns a welcome string.
  */
 router.get('', async (_req, res) => {
-  return res.json('Welcome to Superville REST API');
+  return res.json('Welcome to Twitter REST API');
 });
 
 export { router as apiRouter };

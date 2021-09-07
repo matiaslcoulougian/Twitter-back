@@ -20,9 +20,9 @@ router.get('/:id',async(req,res)=>{
         res.status(400).json({error: e.message}).send();
     }
 });
-router.get('/tweet/:tweetID',async(req,res)=>{
+router.get('/tweet/:tweetId',async(req,res)=>{
     try{
-        const retweets = await RetweetServices.findRetweetsFromTweet({tweetID:req.params.tweetID},true);
+        const retweets = await RetweetServices.findRetweetsFromTweet({tweetId:req.params.tweetId},true);
         res.status(200).json({response: retweets}).send();
     }
     catch(e){
@@ -30,9 +30,9 @@ router.get('/tweet/:tweetID',async(req,res)=>{
     }
 });
 
-router.get('/user/:userRetweeterID',async(req,res)=>{
+router.get('/user/:userRetweeterId',async(req,res)=>{
     try{
-        const retweets = await RetweetServices.findRetweetsFromUser({userRetweeterID : req.params.userRetweeterID},false);
+        const retweets = await RetweetServices.findRetweetsFromUser({userRetweeterId : req.params.userRetweeterId},false);
         res.status(200).json({response: retweets}).send();
     }
     catch(e){

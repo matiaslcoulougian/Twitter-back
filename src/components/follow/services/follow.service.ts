@@ -5,37 +5,38 @@ import {FollowModel} from "@/components/follow/models/follow.model";
 import {TweetModel} from "@/components/tweet/models/tweet.model";
 
 export class FollowService{
-    public static async createFollow({followedUserID, followerUserID}: {
-        followedUserID: string;
-        followerUserID: string;
+    public static async createFollow({followedUserId, followerUserId}: {
+        followedUserId: string;
+        followerUserId: string;
     }) {
-        const followedUser = await UserService.findUserById(followedUserID);
+        const followedUser = await UserService.findUserById(followedUserId);
         if(!followedUser) throw new Error('Followed user not found');
-        const followerUser = await UserService.findUserById(followerUserID);
+        const followerUser = await UserService.findUserById(followerUserId);
         if(!followerUser) throw new Error('Follower user not found');
-        return FollowModel.query().insert({followerUserID: followerUser.id,followedUserID: followedUser.id})
+        return FollowModel.query().insert({followerUserId: followerUser.id,followedUserId: followedUser.id})
     }
     public static findAllFollows(fetchRelated?:boolean){
         const followModelQuery = FollowModel.query().where({isActive:true,});
         return fetchRelated ? this.fetchRelatedList(followModelQuery) : followModelQuery;
     }
 
-    public static findUserFollowers({followedUserID}:{followedUserID:string},fetchRelated?:boolean){
+    public static findUserFollowers({followedUserId}:{followedUserId:string},fetchRelated?:boolean){
         const followersQuery = FollowModel.query().where({
-            followedUserID: followedUserID,
+            followedUserId: followedUserId,
             'follows.isActive': true,
         });
         return fetchRelated ? this.fetchRelatedList(followersQuery) : followersQuery;
     }
 
-    public static findUserFollows({followerUserID}:{followerUserID:string},fetchRelated?:boolean){
+    public static findUserFollows({followerUserId}:{followerUserId:string},fetchRelated?:boolean){
         const followedsQuery = FollowModel.query().where({
-            followerUserID: followerUserID,
+            followerUserId: followerUserId,
             isActive: true,
         });
         return fetchRelated ? this.fetchRelatedList(followedsQuery) : followedsQuery;
     }
-    public static findFollowByID({id}: {id:string},fetchRelated?:boolean){
+
+    public static findFollowById({id}: {id:string},fetchRelated?:boolean){
          const followQuery = FollowModel.query().findOne({
              id: id,
              isActive: true,

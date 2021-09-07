@@ -15,10 +15,10 @@ router.get('/',async(_,res)=>{
         res.status(400).json({error: e.message}).send();
     }
 });
-router.get('/user/:userID',async(req,res)=>{
+router.get('/user/:userId',async(req,res)=>{
     try{
-        const userID= req.params.userID;
-        const tweets = await TweetServices.findAllTweetsFromUser({ userID: userID }, true);
+        const userId= req.params.userId;
+        const tweets = await TweetServices.findAllTweetsFromUser({ userId: userId }, true);
         res.status(200).json({response: tweets}).send();
     }
     catch(e){
@@ -55,9 +55,9 @@ router.post('/', async (req, res) => {
         res.status(400).json({ error: e.message }).send();
     }
 });
-router.delete('/:tweetID', async (req, res) => {
+router.delete('/:tweetId', async (req, res) => {
     try{
-        let tweet = await TweetServices.findTweetById({id: req.params.tweetID},true);
+        let tweet = await TweetServices.findTweetById({id: req.params.tweetId},true);
         tweet = await TweetServices.markAsDeleted(tweet.id);
         res.status(200).json({ response: tweet }).send();
     }

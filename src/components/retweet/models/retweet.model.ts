@@ -6,10 +6,10 @@ import {Model} from "objection";
 export class RetweetModel extends BaseModel{
     public static tableName= 'retweets';
 
-    public userRetweeterID!: string;
+    public userRetweeterId!: string;
     public userRetweeter!: UserModel;
 
-    public tweetID!: string;
+    public tweetId!: string;
     public tweet!: TweetModel;
 
     public isActive!:boolean;
@@ -20,7 +20,7 @@ export class RetweetModel extends BaseModel{
                 relation: Model.HasOneRelation,
                 modelClass: UserModel,
                 join: {
-                    from: `${this.tableName}.userRetweeterID`,
+                    from: `${this.tableName}.userRetweeterId`,
                     to: `${UserModel.tableName}.id`,
                 },
             },
@@ -28,7 +28,7 @@ export class RetweetModel extends BaseModel{
                 relation: Model.HasOneRelation,
                 modelClass: TweetModel,
                 join: {
-                    from: `${this.tableName}.tweetID`,
+                    from: `${this.tableName}.tweetId`,
                     to: `${TweetModel.tableName}.id`,
                 },
             },

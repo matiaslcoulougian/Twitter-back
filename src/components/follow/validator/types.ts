@@ -1,9 +1,9 @@
 import * as z from 'zod';
 export const createFollowerInputSchema = z.object({
-    followerUserID: z.string(),
-    followedUserID: z.string(),
+    followerUserId: z.string(),
+    followedUserId: z.string(),
 });
 export type CreateFollowerInput ={
-    followerUserID: string;
-    followedUserID: string;
+    followerUserId: string;
+    followedUserId: string;
 }

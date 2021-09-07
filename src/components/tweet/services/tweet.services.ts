@@ -4,16 +4,16 @@ import Objection from "objection";
 
 export class TweetServices{
     public static async createTweet({
-        text, userID, parentTweetID
+        text, userId, parentTweetId
                               }: {
         text: string;
-        userID: string;
-        parentTweetID?: string;
+        userId: string;
+        parentTweetId?: string;
     }){
-        const user = await UserService.findUserById(userID);
+        const user = await UserService.findUserById(userId);
         if(!user) throw new Error('User not found');
-        //const parentTweet = await TweetServices.findTweetById(parentTweetID);
-        return TweetModel.query().insert({text, userID: user.id, parentTweetID});
+        //const parentTweet = await TweetServices.findTweetById(parentTweetId);
+        return TweetModel.query().insert({text, userId: user.id, parentTweetId});
     }
     public static findTweetById({id}: {id : string},fetchRelated?:boolean){
         const tweetQuery = TweetModel.query().findOne({'tweets.id':id, 'tweets.isActive':true});
@@ -30,16 +30,16 @@ export class TweetServices{
     public static markAsDeleted(id: string) {
         return TweetModel.query().patchAndFetchById(id, { isActive: false });
     }
-    public static findAllTweetsFromUser({userID}: {userID: string},fetchRelated?:boolean){
+    public static findAllTweetsFromUser({userId}: {userId: string},fetchRelated?:boolean){
         const tweetsQuery = TweetModel.query().where({
-            'tweets.userID':  userID,
+            'tweets.userId':  userId,
             'tweets.isActive': true,
         });
         return fetchRelated? this.fetchRelatedList(tweetsQuery) : tweetsQuery;
     }
     public static findResponsesFromTweet({id}: {id: string},fetchRelated?:boolean){
         const tweetsQuery = TweetModel.query().where({
-            parentTweetID:  id,
+            parentTweetId:  id,
             isActive: true,
         });
         return fetchRelated? this.fetchRelatedList(tweetsQuery) : tweetsQuery;

@@ -21,9 +21,9 @@ router.get('/:id',async(req,res)=>{
         res.status(400).json({error: e.message}).send();
     }
 });
-router.get('/tweet/:tweetID',async(req,res)=>{
+router.get('/tweet/:tweetId',async(req,res)=>{
     try{
-        const likes = await LikeServices.findLikesFromTweet({tweetID:req.params.tweetID},true);
+        const likes = await LikeServices.findLikesFromTweet({tweetId:req.params.tweetId},true);
         res.status(200).json({response: likes}).send();
     }
     catch(e){
@@ -31,9 +31,9 @@ router.get('/tweet/:tweetID',async(req,res)=>{
     }
 });
 
-router.get('/user/:userID',async(req,res)=>{
+router.get('/user/:userId',async(req,res)=>{
     try{
-        const likes = await LikeServices.findLikesFromUser({userID : req.params.userID},true);
+        const likes = await LikeServices.findLikesFromUser({userId : req.params.userId},true);
         res.status(200).json({response: likes}).send();
     }
     catch(e){

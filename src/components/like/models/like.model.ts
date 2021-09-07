@@ -6,9 +6,9 @@ import {Model} from "objection";
 export class LikeModel extends BaseModel {
     public static tableName = 'likes';
 
-    public tweetID!: string;
+    public tweetId!: string;
     public tweet!: TweetModel;
-    public userID!: string;
+    public userId!: string;
     public user!: UserModel;
     public isActive!: boolean;
 
@@ -18,7 +18,7 @@ export class LikeModel extends BaseModel {
                 relation: Model.HasOneRelation,
                 modelClass: TweetModel,
                 join: {
-                    from: `${this.tableName}.tweetID`,
+                    from: `${this.tableName}.tweetId`,
                     to: `${TweetModel.tableName}.id`,
                 },
             },
@@ -26,7 +26,7 @@ export class LikeModel extends BaseModel {
                 relation: Model.HasOneRelation,
                 modelClass: UserModel,
                 join: {
-                    from: `${this.tableName}.userID`,
+                    from: `${this.tableName}.userId`,
                     to: `${UserModel.tableName}.id`,
                 },
             },

@@ -6,10 +6,10 @@ import {Model} from "objection";
 export class FollowModel extends BaseModel {
     public static tableName = 'follows';
 
-    public followerUserID!: string;
+    public followerUserId!: string;
     public followerUser!: UserModel;
 
-    public followedUserID!: string;
+    public followedUserId!: string;
     public followedUser!: UserModel;
 
     public isActive! : boolean;
@@ -20,7 +20,7 @@ export class FollowModel extends BaseModel {
                 relation: Model.HasOneRelation,
                 modelClass: UserModel,
                 join: {
-                    from: `${this.tableName}.followerUserID`,
+                    from: `${this.tableName}.followerUserId`,
                     to: `${UserModel.tableName}.id`,
                 },
             },
@@ -28,7 +28,7 @@ export class FollowModel extends BaseModel {
                 relation: Model.HasOneRelation,
                 modelClass: UserModel,
                 join: {
-                    from: `${this.tableName}.followedUserID`,
+                    from: `${this.tableName}.followedUserId`,
                     to: `${UserModel.tableName}.id`,
                 },
             },
