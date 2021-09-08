@@ -34,6 +34,7 @@ export class UserService{
     }
 
     public static findUserById(id: string) {
+        console.log(id);
         return UserModel.query().findOne({id: id, isActive: true});
     }
 

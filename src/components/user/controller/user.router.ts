@@ -1,11 +1,21 @@
 import express from 'express';
 
-
-import {logger} from "@/logger";
 import {UserService} from "@/components/user/services/user.services";
 import {UserValidator} from "@/components/user/validator/user.validator";
 
 const router = express.Router();
+
+router.get('/me',async(_,res)=>{
+    try{
+        const userId = res.locals.user.id;
+        const user = await UserService.findUserById(userId);
+        res.status(200).json({response:user}).send();
+    }
+    catch(e){
+        res.status(400).json({error: e.message}).send();
+    }
+});
+
 router.get('/',async(_,res)=>{
     try{
         const users = await UserService.findAllUsers();
@@ -24,9 +34,9 @@ router.get('/:userName',async(req,res)=>{
         res.status(400).json({error: e.message}).send();
     }
 });
-router.put('/:userName',async(req,res)=>{
+router.put('/',async(req,res)=>{
     try{
-        const {userName} = req.params;
+        const {userName} = res.locals.user;
         const validateBody = UserValidator.validateUpdateUserBody(req.body);
         const user = await UserService.updateUser(validateBody,{userName});
         res.status(200).json({ response: user }).send();
@@ -59,9 +69,9 @@ router.delete('/:userName', async (req, res) => {
         res.status(404).json({error: e.message}).send();
     }
 });
-router.get('/feed/:userName', async (req, res) => {
+router.get('/feed', async (_, res) => {
     try{
-        const {userName} = req.params;
+        const {userName} = res.locals.user;
         let tweets= await UserService.feed(userName);
         res.status(200).json({ response: tweets }).send();
     }

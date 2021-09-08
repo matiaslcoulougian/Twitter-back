@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
     try {
         const tweetBody = req.body;
         const validatedBody = TweetValidator.validateCreateTweetBody(tweetBody);
-        const tweet = await TweetServices.createTweet(validatedBody);
+        const tweet = await TweetServices.createTweet({...validatedBody,userId:res.locals.user.id}); //Spread validate body y agregale el userId
         res.status(201).json({ response: tweet }).send();
     } catch (e) {
         res.status(400).json({ error: e.message }).send();
