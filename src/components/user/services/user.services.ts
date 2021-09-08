@@ -2,6 +2,7 @@ import {UserModel} from "@/components/user/models/user.model";
 import {FollowService} from "@/components/follow/services/follow.service";
 import {TweetServices} from "@/components/tweet/services/tweet.services";
 import {LikeServices} from "@/components/like/services/like.services";
+import {RetweetServices} from "@/components/retweet/services/retweet.services";
 
 //'userName', 'name','password','mail','phone','birthDate'
 
@@ -55,11 +56,11 @@ export class UserService{
     }
     public static async markAsDeleted(id: string) {
 
-        const tweets = await TweetServices.findAllTweetsFromUser({userID:id});
-        const followed = await FollowService.findUserFollows({followerUserID:id});
-        const followers = await FollowService.findUserFollowers({followedUserID:id});
-        const likes = await LikeServices.findLikesFromUser({userID:id});
-        const retweets = await RetweetServices.findRetweetsFromUser({userRetweeterID:id})
+        const tweets = await TweetServices.findAllTweetsFromUser({userId:id});
+        const followed = await FollowService.findUserFollows({followerUserId:id});
+        const followers = await FollowService.findUserFollowers({followedUserId:id});
+        const likes = await LikeServices.findLikesFromUser({userId:id});
+        const retweets = await RetweetServices.findRetweetsFromUser({userRetweeterId:id})
 
         //For loops to set isActive to false.
         const tweetsPromise = tweets.map((tweet) =>{
