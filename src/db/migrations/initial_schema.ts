@@ -4,13 +4,13 @@ export const up = (knex: Knex): Promise<void> => {
     return knex.schema
         .createTable('users', (table) => {
             table.uuid('id').primary().defaultTo(knex.raw('gen_random_uuid()'));
-            table.string('user_name');
+            table.string('user_name').unique();
             table.string('password');
             table.string('name');
-            table.string('mail');
+            table.string('mail').unique();
             table.string('phone');
             table.string('birth_date');
-            table.string('bibliography');
+            table.string('biography');
             table.string('location');
             table.string('website');
             table.boolean('is_active').defaultTo(true);

@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 export const createUserInputSchema = z.object({
     name: z.string(),
-    bibliography: z.string().optional(),
+    biography: z.string().optional(),
     password: z.string(),
     phone:z.string(),
     mail: z.string().email('Invalid mail format'),
@@ -13,7 +13,7 @@ export const createUserInputSchema = z.object({
 });
 export type CreateUserInput = {
     name: string;
-    bibliography?: string;
+    biography?: string;
     password: string;
     phone: string;
     mail: string;
@@ -24,7 +24,7 @@ export type CreateUserInput = {
 };
 export const updateUserInputSchema= z.object({
     name: z.string().optional(),
-    bibliography: z.string().optional(),
+    biography: z.string().optional(),
     password: z.string().optional(),
     phone: z.string().optional(),
     mail: z.string().email('Invalid mail format').optional(),
@@ -35,7 +35,7 @@ export const updateUserInputSchema= z.object({
 })
 export type UpdateUserInput ={
     name?: string;
-    bibliography?: string;
+    biography?: string;
     password?: string;
     phone?: string;
     mail?: string;

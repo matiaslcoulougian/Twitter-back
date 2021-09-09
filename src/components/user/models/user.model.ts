@@ -13,7 +13,7 @@ export class UserModel extends BaseModel{
     public phone!: string;
     public birthDate!: string;
     public isActive!: boolean;
-    public bibliography?: string;
+    public biography?: string;
     public location?: string;
     public website?: string;
 

@@ -8,7 +8,7 @@ import {RetweetServices} from "@/components/retweet/services/retweet.services";
 
 export class UserService{
     public static createUser({
-        name, userName,password,mail, phone, birthDate,bibliography,location,website
+        name, userName,password,mail, phone, birthDate,biography,location,website
     }: {
         name: string;
         userName: string;
@@ -16,7 +16,7 @@ export class UserService{
         mail: string;
         phone: string;
         birthDate: string;
-        bibliography?: string;
+        biography?: string;
         location?: string;
         website?: string;
     }) {
@@ -27,7 +27,7 @@ export class UserService{
             mail,
             phone,
             birthDate,
-            bibliography,
+            biography,
             location,
             website
         });

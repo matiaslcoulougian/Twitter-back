@@ -6,6 +6,14 @@ export const createUserData = {
   phone: '1118868329',
   birthDate: '06/11/2001'
 };
+export const createUserDataRepeatedMail = {
+  userName: "Matute2",
+  password: "Matute1234*",
+  name: 'Mati',
+  mail: 'maticoulo@gmail.com',
+  phone: '1118868329',
+  birthDate: '06/11/2001'
+};
 
 export const createUserDataWithInvalidMail = {
   userName: "ElMati",
@@ -44,7 +52,15 @@ export const createUserDataWithNoSpecialCharPassword = {
 };
 
 export const anotherEmail = 'micaDominguez@mail.com';
+export const anotherUsername = 'otherName';
 
-export const updateAdminUserData = {
+export const updateUserData = {
   mail: 'newMail@mail.com',
-  password: 'NewPassword12!',};
+  password: 'NewPassword12!',
+  biography: 'new bio',
+  phone:'1324214124',
+  name:'newname',
+  location:'newLoc',
+  website:'newWebsite.com',
+  birthDate:'07/06/2001'
+};
