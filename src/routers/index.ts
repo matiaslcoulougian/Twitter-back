@@ -11,11 +11,13 @@ import {retweetRouter} from "@/components/retweet/controller/retweet.router";
 import {authRouter} from "@/components/auth/controllers/auth.router";
 import {logger} from "@/logger";
 import {AuthService} from "@/components/auth/services/auth.services";
+import {signUpRouter} from "@/components/register/signUp.router";
 
 const router = express.Router();
 
 router.use('', apiRouter);
 router.use('/auth', authRouter);
+router.use('/register', signUpRouter);
 
 router.use(async (req, res, next) => {
     // I'm passing in the access token in header under key authorization

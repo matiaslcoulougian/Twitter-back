@@ -42,7 +42,7 @@ router.get('/user/:userId',async(req,res)=>{
 });
 router.post('/',async(req,res)=>{
     try{
-        const like = await LikeServices.createLike(req.body);
+        const like = await LikeServices.createLike({ tweetId: req.body.tweetId, userId: res.locals.user.id});
         res.status(200).json({response: like}).send();
     }
     catch(e){
@@ -53,8 +53,12 @@ router.delete('/:id',async(req,res)=>{
     try{
         const id = req.params.id;
         let like = await LikeServices.findLikeById({id: id},false);
-        like = await LikeServices.markAsDeleted(id);
-        res.status(200).json({response: like}).send();
+        //like.userId == res.locals.user.id
+        if(like.userId == res.locals.user.id){
+            like = await LikeServices.markAsDeleted(id);
+            res.status(200).json({response: like}).send();
+        }
+
     }
     catch(e){
         res.status(400).json({error: e.message}).send();

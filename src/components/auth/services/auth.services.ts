@@ -12,7 +12,7 @@ export class AuthService{
      */
     public static decodeSessionToken(token: string) {
         const { sub } = decodeUserSessionAccessJWT(token);
-        return sub;
+        return sub; // devuelve id del usuario
     }
 
     public static encodeUserSessionAccess(userId: string) {

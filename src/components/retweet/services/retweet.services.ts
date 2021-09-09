@@ -9,9 +9,15 @@ export class RetweetServices{
         tweetId: string;
     }) {
         const user = await UserService.findUserById(userRetweeterId);
-        if (!user) throw new Error('User not found');
+        if (!user){
+            throw new Error('User not found');
+        }
         const tweet = await TweetServices.findTweetById({id: tweetId}, false);
-        if (!tweet) throw new Error('Tweet not found');
+
+        if (!tweet){
+
+            throw new Error('Tweet not found');
+        }
 
         return RetweetModel.query().insert({userRetweeterId: user.id, tweetId: tweet.id});
     }

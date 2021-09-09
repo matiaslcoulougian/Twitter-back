@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
     try {
         const followBody = req.body;
         const validatedBody = FollowerValidator.validateCreateFollowerBody(followBody);
-        const follow = await FollowService.createFollow(validatedBody);
+        const follow = await FollowService.createFollow({followedUserId: validatedBody.followedUserId, followerUserId: res.locals.user.id });
         res.status(201).json({ response: follow }).send();
     } catch (e) {
         res.status(400).json({ error: e.message }).send();

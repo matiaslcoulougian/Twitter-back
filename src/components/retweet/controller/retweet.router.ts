@@ -40,11 +40,13 @@ router.get('/user/:userRetweeterId',async(req,res)=>{
     }
 });
 router.post('/',async(req,res)=>{
+
     try{
-        const retweet = await RetweetServices.createRetweet(req.body);
+        const retweet = await RetweetServices.createRetweet({userRetweeterId: res.locals.user.id, tweetId: req.body.tweetId});
         res.status(200).json({response: retweet}).send();
     }
     catch(e){
+
         res.status(400).json({error: e.message}).send();
     }
 });
@@ -52,8 +54,10 @@ router.delete('/:id',async(req,res)=>{
     try{
         const id = req.params.id;
         let retweet = await RetweetServices.findRetweetById({id: id},false);
-        retweet = await RetweetServices.markAsDeleted(id);
-        res.status(200).json({response: retweet}).send();
+        if(retweet.userRetweeterId == res.locals.user.id){
+            retweet = await RetweetServices.markAsDeleted(id);
+            res.status(200).json({response: retweet}).send();
+        }
     }
     catch(e){
         res.status(400).json({error: e.message}).send();
