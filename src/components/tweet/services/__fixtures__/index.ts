@@ -1,11 +1,6 @@
 
-export const createTweetData = {
-    text: '123456789101112131415161718192021',
-};
+export const tweetText = 'Hola mi nombre es Mica. Empece a trabajar en sirius con mi pana el Mati. Pero me quiero ir a mulesoft con el pedrito colunga que ya me esta fichando';
 
-
-export const createTweetWithInvalidLongText = {
-    text: '01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789',
-};
+export const longTweetText = 'LongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongTextLongText';
 
 
