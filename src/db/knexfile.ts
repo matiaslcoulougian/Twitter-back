@@ -6,7 +6,7 @@ const testUrl ={
   host: 'localhost',
   user: 'postgres',
   password: 'postgres',
-  database: 'twitter_db'
+  database: 'twitter_test_db'
 }
 const url ={
   host: 'localhost',
