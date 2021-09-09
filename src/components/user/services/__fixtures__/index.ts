@@ -43,9 +43,8 @@ export const createUserDataWithNoSpecialCharPassword = {
   birthDate: '06/11/2001'
 };
 
-// export const anotherEmail = 'micaDominguez@mail.com';
-//
-// export const updateAdminUserData = {
-//   mail: 'newMail@mail.com',
-//   password: 'NewPassword12!',
-// };
+export const anotherEmail = 'micaDominguez@mail.com';
+
+export const updateAdminUserData = {
+  mail: 'newMail@mail.com',
+  password: 'NewPassword12!',};
