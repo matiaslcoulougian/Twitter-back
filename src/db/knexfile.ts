@@ -5,14 +5,14 @@ import { isTestEnv } from '../config';
 const testUrl ={
   host: 'localhost',
   user: 'postgres',
-  password: '09530953',
-  database: 'plans_db'
+  password: 'postgres',
+  database: 'twitter_test_db'
 }
 const url ={
   host: 'localhost',
   user: 'postgres',
-  password: '09530953',
-  database: 'plans_db'
+  password: 'postgres',
+  database: 'twitter_db'
 }
 
 const connectionConfig = isTestEnv ? testUrl : url;
@@ -22,7 +22,7 @@ const knexConfig: Knex.Config = {
   connection: connectionConfig,
   migrations: {
     tableName: 'migrations',
-    directory: 'migrations',
+    directory: 'src/db/migrations',
   },
   debug: false,
 };
